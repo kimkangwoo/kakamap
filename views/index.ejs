@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>homepage</title>
     <!-- services와 clusterer, drawing 라이브러리 불러오기 -->
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=[api key]&libraries=services,clusterer,drawing"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	[api key] &libraries=services,clusterer,drawing"></script>
 </head>
 <body>
     <h1>현재 페이지에서 카카오 맵 구현</h1>
@@ -13,15 +13,30 @@
     <div id="map" style="width:800px;height:800px;"></div>
     <script>
 		var container = document.getElementById('map');
-        var Lat = 36.16978930855908
-        var Lng = 128.46777314109582
+        var Lat = 33.452344169439975
+        var Lng = 126.56878163224233
         
 		var options = {
             center: new kakao.maps.LatLng(Lat, Lng),
 			level: 3
 		};
+
+        var polyline = new kakao.maps.Polyline({
+            map: map,
+            path: [
+                new kakao.maps.LatLng(33.453263833226046, 126.5713695725686),
+                new kakao.maps.LatLng(33.45164086682923, 126.57136644617704),
+                new kakao.maps.LatLng(33.38322786996483, 126.57953709253324) 
+            ],
+            strokeWeight: 2,
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.8,
+            strokeStyle: 'solid'
+        });
+
 		var map = new kakao.maps.Map(container, options);
-        
+        polyline.setMap(map);
+
         var marker = new kakao.maps.Marker({
             map: map,
             position: new kakao.maps.LatLng(Lat, Lng)
@@ -29,6 +44,7 @@
 
         function setCenter() {            
             // 이동할 위도 경도 위치를 생성합니다 
+            //var moveLatLon = new kakao.maps.LatLng(33.452613, 126.570888);
             var moveLatLon = new kakao.maps.LatLng(33.452613, 126.570888);
             
             // 지도 중심을 이동 시킵니다
@@ -60,6 +76,8 @@
                 resultDiv.innerHTML = message;
                 
             });
+
+        
         </script>
     <button onclick="setCenter()">누르면 마커 이동</button>
     <button onclick="move()">누르면 마커 이동</button>
